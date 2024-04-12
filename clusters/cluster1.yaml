@@ -2,7 +2,7 @@
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: Cluster
 metadata:
-  name: "pvala-cluster"
+  name: "turtles-qa-cluster"
 spec:
   clusterNetwork:
     pods:
@@ -10,16 +10,16 @@ spec:
   infrastructureRef:
     kind: AWSManagedControlPlane
     apiVersion: controlplane.cluster.x-k8s.io/v1beta2
-    name: "pvala-cluster-control-plane"
+    name: "turtles-qa-cluster-control-plane"
   controlPlaneRef:
     kind: AWSManagedControlPlane
     apiVersion: controlplane.cluster.x-k8s.io/v1beta2
-    name: "pvala-cluster-control-plane"
+    name: "turtles-qa-cluster-control-plane"
 ---
 kind: AWSManagedControlPlane
 apiVersion: controlplane.cluster.x-k8s.io/v1beta2
 metadata:
-  name: "pvala-cluster-control-plane"
+  name: "turtles-qa-cluster-control-plane"
 spec:
   region: "ap-south-1"
   version: "v1.28"
@@ -27,22 +27,22 @@ spec:
 apiVersion: cluster.x-k8s.io/v1beta1
 kind: MachinePool
 metadata:
-  name: "pvala-cluster-pool-0"
+  name: "turtles-qa-cluster-pool-0"
 spec:
-  clusterName: "pvala-cluster"
+  clusterName: "turtles-qa-cluster"
   template:
     spec:
-      clusterName: "pvala-cluster"
+      clusterName: "turtles-qa-cluster"
       bootstrap: 
         dataSecretName: ""
       infrastructureRef:
-        name: "pvala-cluster-pool-0"
+        name: "turtles-qa-cluster-pool-0"
         apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
         kind: AWSManagedMachinePool
 ---
 apiVersion: infrastructure.cluster.x-k8s.io/v1beta2
 kind: AWSManagedMachinePool
 metadata:
-  name: "pvala-cluster-pool-0"
+  name: "turtles-qa-cluster-pool-0"
 spec:
   instanceType: t3.medium
